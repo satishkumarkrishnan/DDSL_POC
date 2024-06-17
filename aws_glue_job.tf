@@ -7,7 +7,7 @@ resource "aws_glue_job" "example" {
   number_of_workers = "2.0"
   worker_type = "G.1X"
   command {
-    name            = "pythonshell"
+   # name            = "pythonshell"
     script_location = "s3://${aws_s3_bucket.example1.bucket}/segregate.py"
     python_version = "3"
   }
