@@ -40,6 +40,20 @@ resource "aws_cloudwatch_event_target" "cloudwatch_target" {
   target_id = "cloudwatchtarget"
   rule = aws_cloudwatch_event_rule.event_from_s3.name
   arn  = "${aws_cloudwatch_log_group.eventbridge_log_group.arn}" 
+  input_transformer {
+    input_paths = {
+      object = "$.detail.object.key",
+      bucket   = "$.detail.bucket.name",
+      timestamp = "$.time"
+    }
+    input_template = <<EOF
+   {
+      "timestamp":<timestamp>,
+      "message":"<object> uploaded in <bucket> at <timestamp>"
+   }
+ 
+    EOF
+  }
 }
 
 resource "aws_cloudwatch_event_permission" "allow_s3_cloudwatch_permission" {

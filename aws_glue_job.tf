@@ -4,7 +4,7 @@ resource "aws_glue_job" "example" {
   role_arn = aws_iam_role.gluerole.arn
   max_capacity = "1.0"
   glue_version = "4.0"
-  number_of_workers = "2"
+  number_of_workers = "1"
   command {
     name            = "pythonshell"
     script_location = "s3://${aws_s3_bucket.example1.bucket}/segregate.py"
