@@ -4,7 +4,7 @@ resource "aws_glue_job" "example" {
   role_arn = aws_iam_role.gluerole.arn
   #max_capacity = "1.0"
   glue_version = "4.0"
-  number_of_workers = "1.0"
+  number_of_workers = "2.0"
   worker_type = "G.1X"
   command {
     name            = "pythonshell"
