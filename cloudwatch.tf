@@ -9,21 +9,6 @@ resource "aws_cloudwatch_log_group" "cloudtrail_log_group" {
 #Resource creation for AWS Cloud Watch log group
 resource "aws_cloudwatch_log_group" "eventbridge_log_group" {
   name = "/aws/events/eventbridgelogs"
-  input_transformer {
-    input_paths = {
-      object = "$.detail.object.key",
-      bucket   = "$.detail.bucket.name",
-      timestamp = "$.time"
-    }
-    input_template = <<EOF
-   {
-      "timestamp":<timestamp>,
-      "message":"<object> uploaded in <bucket> at <timestamp>"
-   }
- 
-    EOF
-  }
-
   tags = {
     Environment = "Dev"
     Application = "POC"
