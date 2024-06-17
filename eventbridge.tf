@@ -34,8 +34,6 @@ resource "aws_cloudwatch_event_rule" "step_function_trigger_event_rule" {
   )  
 }
 
-
-
 #Resource creation for AWS Cloud Watch event target to store the events in target cloudwatch
 resource "aws_cloudwatch_event_target" "cloudwatch_target" {
   target_id = "cloudwatchtarget"
@@ -52,8 +50,7 @@ resource "aws_cloudwatch_event_permission" "allow_s3_cloudwatch_permission" {
 #Resource creation for AWS Cloud Watch event target to store the events in target stepfunction 
 resource "aws_cloudwatch_event_target" "stepfunction_target" {
   target_id = "stepfunctiontarget"
-  rule = aws_cloudwatch_event_rule.event_from_s3.name
-  #arn  = "${aws_cloudwatch_log_group.stepfunction_log_group.arn}" 
+  rule = aws_cloudwatch_event_rule.event_from_s3.name  
   arn  = "${aws_sfn_state_machine.sfn_state_machine.arn}"
   role_arn = aws_iam_role.iam_for_sfn.arn
 }
