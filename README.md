@@ -1,2 +1,2 @@
-# DDSL_POC
-Terraform code for DDSL
+# AWS_Glue
+To Provision AWS Glue using Terraform
